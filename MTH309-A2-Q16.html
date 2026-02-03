@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Is 𝒢 a σ-field? — Interactive Proof</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap');
+
+  :root {
+    --bg: #0a0a0f;
+    --card: #131318;
+    --card-border: #22222e;
+    --text: #e8e6ef;
+    --text-dim: #7a7890;
+    --accent: #c8a86e;
+    --accent-dim: rgba(200,168,110,0.15);
+    --green: #6fcf82;
+    --green-dim: rgba(111,207,130,0.12);
+    --red: #e07070;
+    --red-dim: rgba(224,112,112,0.12);
+    --blue: #7aabf0;
+    --blue-dim: rgba(122,171,240,0.15);
+    --purple: #b088e8;
+    --purple-dim: rgba(176,136,232,0.15);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ─── ambient grain ─── */
+  body::before {
+    content:'';
+    position:fixed; inset:0; z-index:0;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events:none;
+  }
+
+  .page-wrap { position:relative; z-index:1; max-width:900px; margin:0 auto; padding:60px 28px 100px; }
+
+  /* ─── Header ─── */
+  header { text-align:center; margin-bottom:70px; }
+  header .eyebrow {
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px; letter-spacing:3px; text-transform:uppercase;
+    color:var(--accent); opacity:.7; margin-bottom:18px;
+  }
+  header h1 {
+    font-family:'Playfair Display',serif;
+    font-size:clamp(28px,5vw,42px);
+    font-weight:400; line-height:1.2;
+    color:#fff;
+  }
+  header h1 em { font-style:italic; color:var(--accent); }
+  header .sub {
+    margin-top:14px; font-size:14px; color:var(--text-dim); max-width:540px; margin-left:auto; margin-right:auto;
+  }
+
+  /* ─── verdict banner ─── */
+  .verdict {
+    display:flex; align-items:center; gap:16px;
+    background:var(--green-dim); border:1px solid rgba(111,207,130,0.25);
+    border-radius:12px; padding:18px 24px; margin-bottom:48px;
+  }
+  .verdict-icon { font-size:28px; flex-shrink:0; }
+  .verdict-text { font-size:15px; }
+  .verdict-text strong { color:var(--green); font-weight:500; }
+
+  /* ─── Section cards ─── */
+  .section-card {
+    background:var(--card); border:1px solid var(--card-border);
+    border-radius:14px; margin-bottom:28px; overflow:hidden;
+    animation: fadeUp .5s ease both;
+  }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
+
+  .card-header {
+    display:flex; align-items:center; gap:14px;
+    padding:18px 24px; cursor:pointer; user-select:none;
+    border-bottom:1px solid var(--card-border);
+    transition: background .2s;
+  }
+  .card-header:hover { background:rgba(255,255,255,.03); }
+
+  .card-header .num {
+    font-family:'JetBrains Mono',monospace;
+    background:var(--accent-dim); color:var(--accent);
+    width:32px; height:32px; border-radius:8px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:13px; flex-shrink:0;
+  }
+  .card-header h2 { font-family:'Playfair Display',serif; font-weight:400; font-size:19px; color:#fff; flex:1; }
+  .card-header .toggle-icon { color:var(--text-dim); font-size:18px; transition:transform .3s; }
+  .card-header.open .toggle-icon { transform:rotate(180deg); }
+
+  .card-body { padding:0; max-height:0; overflow:hidden; transition:max-height .45s cubic-bezier(.4,0,.2,1), padding .3s; }
+  .card-body.open { max-height:1200px; padding:24px; }
+
+  /* proof text styling */
+  .proof-text { font-size:14px; color:var(--text-dim); margin-bottom:16px; }
+  .proof-text .math { font-family:'JetBrains Mono',monospace; color:var(--text); font-size:13px; }
+  .proof-text strong { color:var(--text); font-weight:500; }
+
+  .tag {
+    display:inline-block; font-size:11px; font-family:'JetBrains Mono',monospace;
+    padding:3px 9px; border-radius:20px; margin-right:6px;
+  }
+  .tag.proved { background:var(--green-dim); color:var(--green); }
+  .tag.key { background:var(--blue-dim); color:var(--blue); }
+
+  /* ─── SVG Canvas areas ─── */
+  .canvas-wrap {
+    background:#0e0e14; border-radius:10px; border:1px solid var(--card-border);
+    margin:18px 0; padding:16px; text-align:center;
+  }
+  .canvas-wrap svg { display:block; margin:0 auto; }
+  .canvas-label {
+    font-family:'JetBrains Mono',monospace; font-size:11px;
+    color:var(--text-dim); margin-top:8px; letter-spacing:1px;
+  }
+
+  /* ─── Buttons ─── */
+  .btn-row { display:flex; gap:10px; flex-wrap:wrap; margin:16px 0; }
+  .btn {
+    font-family:'JetBrains Mono',monospace; font-size:12px;
+    background:var(--accent-dim); color:var(--accent);
+    border:1px solid rgba(200,168,110,.3); border-radius:20px;
+    padding:7px 16px; cursor:pointer; transition:all .2s;
+  }
+  .btn:hover { background:rgba(200,168,110,.3); }
+  .btn.active { background:var(--accent); color:#0a0a0f; font-weight:500; }
+
+  /* ─── Complement animation state labels ─── */
+  .state-label {
+    font-family:'JetBrains Mono',monospace; font-size:12px;
+    color:var(--text-dim); margin-top:10px;
+  }
+  .state-label .hl { color:var(--accent); font-weight:500; }
+
+  /* ─── Sigma field requirements checklist ─── */
+  .checklist { margin:12px 0; }
+  .check-item {
+    display:flex; align-items:flex-start; gap:12px; padding:10px 0;
+    border-bottom:1px solid rgba(255,255,255,.05);
+  }
+  .check-item:last-child { border-bottom:none; }
+  .check-icon {
+    width:22px; height:22px; border-radius:6px; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    font-size:13px; margin-top:2px;
+  }
+  .check-icon.yes { background:var(--green-dim); color:var(--green); border:1px solid rgba(111,207,130,.3); }
+  .check-icon.no  { background:var(--red-dim);   color:var(--red);   border:1px solid rgba(224,112,112,.3); }
+  .check-title { font-weight:500; color:var(--text); font-size:14px; }
+  .check-desc { font-size:13px; color:var(--text-dim); margin-top:3px; }
+
+  /* ─── Animated number line / probability strip ─── */
+  .prob-strip-wrap { margin:18px 0; }
+  .prob-strip {
+    height:40px; border-radius:8px; position:relative;
+    background: linear-gradient(90deg, var(--red-dim) 0%, var(--red-dim) 30%, var(--green-dim) 30%, var(--green-dim) 70%, var(--red-dim) 70%, var(--red-dim) 100%);
+    border:1px solid var(--card-border);
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0 12px;
+  }
+  .prob-strip .pin {
+    font-family:'JetBrains Mono',monospace; font-size:12px;
+    color:var(--text); background:var(--card); padding:2px 8px; border-radius:4px;
+    position:relative; z-index:1;
+  }
+  .prob-strip .pin.zero { color:var(--green); }
+  .prob-strip .pin.one  { color:var(--green); }
+  .prob-strip .pin.mid  { color:var(--red); }
+
+  .prob-labels {
+    display:flex; justify-content:space-between; margin-top:6px;
+  }
+  .prob-labels span {
+    font-size:11px; color:var(--text-dim); font-family:'JetBrains Mono',monospace;
+  }
+  .prob-labels span.ok { color:var(--green); }
+  .prob-labels span.bad { color:var(--red); }
+
+  /* ─── Countable union interactive ─── */
+  .union-demo { margin:18px 0; }
+  .union-sets { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px; }
+  .set-chip {
+    font-family:'JetBrains Mono',monospace; font-size:13px;
+    padding:6px 14px; border-radius:8px; cursor:pointer;
+    border:2px solid transparent; transition:all .25s;
+  }
+  .set-chip.off  { background:rgba(255,255,255,.04); color:var(--text-dim); border-color:rgba(255,255,255,.1); }
+  .set-chip.on   { background:var(--blue-dim); color:var(--blue); border-color:rgba(122,171,240,.35); }
+  .union-result {
+    font-family:'JetBrains Mono',monospace; font-size:14px;
+    padding:12px 18px; border-radius:8px;
+    background:rgba(255,255,255,.03); border:1px solid var(--card-border);
+    transition: all .3s;
+  }
+  .union-result .r-label { color:var(--text-dim); font-size:11px; display:block; margin-bottom:4px; letter-spacing:1px; }
+
+  /* ─── Proof summary box ─── */
+  .proof-box {
+    background:linear-gradient(135deg, rgba(111,207,130,.06), rgba(122,171,240,.05));
+    border:1px solid rgba(111,207,130,.2);
+    border-radius:12px; padding:22px 24px; margin-top:12px;
+  }
+  .proof-box h3 {
+    font-family:'Playfair Display',serif; font-size:17px; color:var(--green); margin-bottom:10px; font-weight:400;
+  }
+  .proof-box p { font-size:13px; color:var(--text-dim); margin-bottom:8px; }
+  .proof-box .math { font-family:'JetBrains Mono',monospace; color:var(--text); font-size:12.5px; }
+
+  /* ─── Animated pulse on Omega circle ─── */
+  @keyframes pulse { 0%,100%{ r:72; } 50%{ r:75; } }
+
+  /* ─── Footer ─── */
+  footer { text-align:center; margin-top:60px; padding-top:30px; border-top:1px solid var(--card-border); }
+  footer p { font-size:12px; color:var(--text-dim); font-family:'JetBrains Mono',monospace; }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width:6px; }
+  ::-webkit-scrollbar-track { background:var(--bg); }
+  ::-webkit-scrollbar-thumb { background:var(--card-border); border-radius:3px; }
+</style>
+</head>
+<body>
+<!-- ═══════════════ PAGE ═══════════════ -->
+<div class="page-wrap">
+
+  <!-- Header -->
+  <header>
+    <div class="eyebrow">Measure Theory · σ-Algebras</div>
+    <h1>Is <em>𝒢</em> = { A ∈ ℱ : P(A) = 0 or 1 } a σ-field?</h1>
+    <p class="sub">An interactive, visual proof verifying all three σ-field axioms on the collection of measure-zero and measure-one sets.</p>
+  </header>
+
+  <!-- Verdict -->
+  <div class="verdict">
+    <div class="verdict-icon">✓</div>
+    <div class="verdict-text"><strong>Yes — 𝒢 is a σ-field.</strong> Every axiom holds: Ω ∈ 𝒢, closure under complements, and closure under countable unions.</div>
+  </div>
+
+  <!-- ════ SETUP ════ -->
+  <div class="section-card" style="animation-delay:.05s">
+    <div class="card-header open" onclick="toggle(this)">
+      <div class="num">0</div>
+      <h2>Setup & Definitions</h2>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="card-body open">
+      <p class="proof-text">
+        We work on a probability space <span class="math">(Ω, ℱ, P)</span>.
+        The candidate σ-field is
+      </p>
+      <div class="canvas-wrap" style="padding:22px 16px;">
+        <svg width="520" height="140" viewBox="0 0 520 140">
+          <!-- Ω circle -->
+          <defs>
+            <radialGradient id="omegaGrad" cx="50%" cy="50%">
+              <stop offset="0%" stop-color="#1a1a25"/>
+              <stop offset="100%" stop-color="#0e0e14"/>
+            </radialGradient>
+          </defs>
+          <ellipse cx="260" cy="70" rx="240" ry="58" fill="url(#omegaGrad)" stroke="#22222e" stroke-width="1.5"/>
+          <text x="40" y="28" fill="#7a7890" font-family="JetBrains Mono" font-size="13">Ω</text>
+
+          <!-- P=0 blobs (red-ish) -->
+          <ellipse cx="100" cy="75" rx="42" ry="28" fill="rgba(224,112,112,0.12)" stroke="rgba(224,112,112,0.3)" stroke-width="1.2"/>
+          <text x="82" y="72" fill="#e07070" font-family="JetBrains Mono" font-size="11">P = 0</text>
+          <text x="85" y="87" fill="#7a7890" font-family="JetBrains Mono" font-size="9">A₁</text>
+
+          <ellipse cx="175" cy="95" rx="30" ry="18" fill="rgba(224,112,112,0.1)" stroke="rgba(224,112,112,0.25)" stroke-width="1"/>
+          <text x="162" y="93" fill="#e07070" font-family="JetBrains Mono" font-size="10">P=0</text>
+          <text x="168" y="105" fill="#7a7890" font-family="JetBrains Mono" font-size="9">A₂</text>
+
+          <!-- P=1 blobs (green-ish) -->
+          <ellipse cx="370" cy="70" rx="48" ry="30" fill="rgba(111,207,130,0.1)" stroke="rgba(111,207,130,0.3)" stroke-width="1.2"/>
+          <text x="350" y="67" fill="#6fcf82" font-family="JetBrains Mono" font-size="11">P = 1</text>
+          <text x="357" y="83" fill="#7a7890" font-family="JetBrains Mono" font-size="9">B₁</text>
+
+          <!-- labels -->
+          <text x="30" y="135" fill="#7a7890" font-family="JetBrains Mono" font-size="10">Red regions: measure 0   |   Green regions: measure 1   |   All others: NOT in 𝒢</text>
+        </svg>
+      </div>
+      <p class="proof-text">
+        <strong>Goal:</strong> verify the three σ-field axioms —
+        (1) <span class="math">Ω ∈ 𝒢</span>,
+        (2) closed under complements,
+        (3) closed under countable unions.
+      </p>
+    </div>
+  </div>
+
+  <!-- ════ AXIOM 1: Ω ∈ 𝒢 ════ -->
+  <div class="section-card" style="animation-delay:.12s">
+    <div class="card-header open" onclick="toggle(this)">
+      <div class="num">1</div>
+      <h2>Axiom 1 — Ω ∈ 𝒢</h2>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="card-body open">
+      <span class="tag proved">✓ Proved</span>
+      <p class="proof-text" style="margin-top:12px;">
+        A probability measure satisfies <span class="math">P(Ω) = 1</span> by definition.
+        Therefore <span class="math">Ω</span> satisfies the condition "<span class="math">P(A) = 0</span> or <span class="math">P(A) = 1</span>" (specifically the latter).
+      </p>
+      <div class="canvas-wrap">
+        <svg width="360" height="120" viewBox="0 0 360 120">
+          <ellipse cx="180" cy="60" rx="150" ry="48" fill="rgba(111,207,130,0.1)" stroke="rgba(111,207,130,0.4)" stroke-width="2" stroke-dasharray="6 3"/>
+          <text x="155" y="55" fill="#6fcf82" font-family="Playfair Display" font-size="22" font-style="italic">Ω</text>
+          <text x="140" y="78" fill="#6fcf82" font-family="JetBrains Mono" font-size="13">P(Ω) = 1 ✓</text>
+          <text x="50" y="115" fill="#7a7890" font-family="JetBrains Mono" font-size="10">The entire sample space has probability 1 → Ω ∈ 𝒢</text>
+        </svg>
+      </div>
+      <div class="proof-box">
+        <h3>Formal argument</h3>
+        <p>Since <span class="math">P(Ω) = 1</span>, we have <span class="math">Ω ∈ { A ∈ ℱ : P(A) = 0 or 1 } = 𝒢</span>. □</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ AXIOM 2: Complements ════ -->
+  <div class="section-card" style="animation-delay:.18s">
+    <div class="card-header" onclick="toggle(this)">
+      <div class="num">2</div>
+      <h2>Axiom 2 — Closure under Complements</h2>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="card-body">
+      <span class="tag proved">✓ Proved</span>
+      <p class="proof-text" style="margin-top:12px;">
+        Pick any <span class="math">A ∈ 𝒢</span>. We must show <span class="math">Aᶜ ∈ 𝒢</span>.
+        Use the key identity <span class="math">P(Aᶜ) = 1 − P(A)</span> and toggle the interactive diagram below.
+      </p>
+      <div class="btn-row" id="compButtons">
+        <button class="btn active" onclick="setComp('zero')">Case: P(A) = 0</button>
+        <button class="btn"       onclick="setComp('one') ">Case: P(A) = 1</button>
+      </div>
+      <!-- interactive SVG -->
+      <div class="canvas-wrap">
+        <svg id="compSVG" width="460" height="150" viewBox="0 0 460 150">
+          <!-- Omega -->
+          <ellipse cx="230" cy="72" rx="200" ry="58" fill="#0e0e14" stroke="#22222e" stroke-width="1.5"/>
+          <text x="45" y="30" fill="#7a7890" font-family="JetBrains Mono" font-size="12">Ω</text>
+          <!-- A region -->
+          <ellipse id="compA" cx="140" cy="75" rx="65" ry="42" fill="rgba(224,112,112,0.18)" stroke="rgba(224,112,112,0.4)" stroke-width="2"/>
+          <text x="118" y="72" fill="#e07070" font-family="JetBrains Mono" font-size="13" id="compALabel">A</text>
+          <text x="110" y="90" fill="#e07070" font-family="JetBrains Mono" font-size="11" id="compAProb">P(A)=0</text>
+          <!-- Ac region label -->
+          <text x="300" y="72" fill="#6fcf82" font-family="JetBrains Mono" font-size="13" id="compAcLabel">Aᶜ</text>
+          <text x="290" y="90" fill="#6fcf82" font-family="JetBrains Mono" font-size="11" id="compAcProb">P(Aᶜ)=1</text>
+          <!-- annotation -->
+          <text x="80" y="145" fill="#7a7890" font-family="JetBrains Mono" font-size="10" id="compAnnotation">P(A)=0  →  P(Aᶜ) = 1−0 = 1  →  Aᶜ ∈ 𝒢 ✓</text>
+        </svg>
+      </div>
+      <div class="state-label" id="compState">Current case: <span class="hl">P(A) = 0</span> → P(Aᶜ) = <span class="hl">1</span></div>
+      <div class="proof-box">
+        <h3>Formal argument</h3>
+        <p>Let <span class="math">A ∈ 𝒢</span>. Then <span class="math">P(A) ∈ {0,1}</span>.</p>
+        <p>• If <span class="math">P(A) = 0</span>, then <span class="math">P(Aᶜ) = 1 − 0 = 1</span>, so <span class="math">Aᶜ ∈ 𝒢</span>.</p>
+        <p>• If <span class="math">P(A) = 1</span>, then <span class="math">P(Aᶜ) = 1 − 1 = 0</span>, so <span class="math">Aᶜ ∈ 𝒢</span>. □</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ AXIOM 3: Countable unions ════ -->
+  <div class="section-card" style="animation-delay:.24s">
+    <div class="card-header" onclick="toggle(this)">
+      <div class="num">3</div>
+      <h2>Axiom 3 — Countable Unions</h2>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="card-body">
+      <span class="tag proved">✓ Proved</span>
+      <span class="tag key">Key Argument</span>
+      <p class="proof-text" style="margin-top:12px;">
+        This is the deepest axiom. Given <span class="math">A₁, A₂, … ∈ 𝒢</span>,
+        show <span class="math">∪ᵢ Aᵢ ∈ 𝒢</span>.  The proof splits into two cases.
+        Toggle sets on/off below to build intuition.
+      </p>
+
+      <!-- Sub-case selector -->
+      <div class="btn-row" id="unionCaseButtons">
+        <button class="btn active" onclick="setUnionCase('allzero')">All P(Aᵢ)=0</button>
+        <button class="btn"       onclick="setUnionCase('someone')">Some P(Aᵢ)=1</button>
+      </div>
+
+      <!-- interactive chips -->
+      <div class="union-demo">
+        <div class="union-sets" id="unionSets"></div>
+        <div class="union-result">
+          <span class="r-label">RESULTING UNION</span>
+          <span id="unionExpr">A₁ ∪ A₂ ∪ A₃</span>
+          <span style="color:var(--text-dim);font-size:13px;margin-left:14px;" id="unionProb">P(∪) = 0  ∈ {0,1} ✓</span>
+        </div>
+      </div>
+
+      <!-- Static diagram for the case -->
+      <div class="canvas-wrap">
+        <svg id="unionSVG" width="500" height="160" viewBox="0 0 500 160">
+          <!-- Omega -->
+          <ellipse cx="250" cy="78" rx="220" ry="60" fill="#0e0e14" stroke="#22222e" stroke-width="1.5"/>
+          <text x="45" y="28" fill="#7a7890" font-family="JetBrains Mono" font-size="12">Ω</text>
+          <!-- A1 -->
+          <ellipse id="uA1" cx="130" cy="80" rx="52" ry="35" fill="rgba(224,112,112,0.14)" stroke="rgba(224,112,112,0.3)" stroke-width="1.5"/>
+          <text x="112" y="78" fill="#e07070" font-family="JetBrains Mono" font-size="11">A₁ P=0</text>
+          <!-- A2 -->
+          <ellipse id="uA2" cx="230" cy="95" rx="40" ry="26" fill="rgba(224,112,112,0.14)" stroke="rgba(224,112,112,0.3)" stroke-width="1.5"/>
+          <text x="213" y="93" fill="#e07070" font-family="JetBrains Mono" font-size="11">A₂ P=0</text>
+          <!-- A3 -->
+          <ellipse id="uA3" cx="350" cy="78" rx="48" ry="33" fill="rgba(224,112,112,0.14)" stroke="rgba(224,112,112,0.3)" stroke-width="1.5"/>
+          <text x="332" y="78" fill="#e07070" font-family="JetBrains Mono" font-size="11">A₃ P=0</text>
+
+          <!-- union annotation -->
+          <text id="unionAnnot1" x="60" y="148" fill="#7a7890" font-family="JetBrains Mono" font-size="10">Case 1: All Aᵢ have P=0 → P(∪Aᵢ) ≤ ΣP(Aᵢ) = 0 → P(∪Aᵢ) = 0 ∈ {0,1} ✓</text>
+        </svg>
+      </div>
+
+      <!-- Two-case proof box -->
+      <div class="proof-box">
+        <h3>Case 1 — All P(Aᵢ) = 0</h3>
+        <p>By <strong style="color:var(--blue);">countable sub-additivity</strong>: <span class="math">P(∪ᵢ Aᵢ) ≤ Σᵢ P(Aᵢ) = 0</span>. Since probability is non-negative, <span class="math">P(∪ Aᵢ) = 0 ∈ {0,1}</span>. ✓</p>
+      </div>
+      <div class="proof-box" style="border-color:rgba(122,171,240,.25); background:linear-gradient(135deg,rgba(122,171,240,.06),rgba(176,136,232,.05)); margin-top:12px;">
+        <h3 style="color:var(--blue);">Case 2 — Some P(Aⱼ) = 1</h3>
+        <p>If any single <span class="math">Aⱼ</span> has <span class="math">P(Aⱼ) = 1</span>, then <span class="math">Aⱼ ⊆ ∪ᵢ Aᵢ</span>, so by <strong style="color:var(--purple);">monotonicity</strong>:</p>
+        <p><span class="math">1 = P(Aⱼ) ≤ P(∪ᵢ Aᵢ) ≤ 1</span>  →  <span class="math">P(∪ᵢ Aᵢ) = 1 ∈ {0,1}</span>. ✓</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ SUMMARY ════ -->
+  <div class="section-card" style="animation-delay:.30s">
+    <div class="card-header open" onclick="toggle(this)">
+      <div class="num">∑</div>
+      <h2>Summary — All Axioms Verified</h2>
+      <div class="toggle-icon">▼</div>
+    </div>
+    <div class="card-body open">
+      <div class="checklist">
+        <div class="check-item">
+          <div class="check-icon yes">✓</div>
+          <div>
+            <div class="check-title">Contains Ω</div>
+            <div class="check-desc"><span class="math">P(Ω)=1</span> so <span class="math">Ω ∈ 𝒢</span> immediately.</div>
+          </div>
+        </div>
+        <div class="check-item">
+          <div class="check-icon yes">✓</div>
+          <div>
+            <div class="check-title">Closed under complements</div>
+            <div class="check-desc"><span class="math">P(Aᶜ) = 1 − P(A)</span> maps <span class="math">{0,1}</span> to <span class="math">{1,0} ⊂ {0,1}</span>.</div>
+          </div>
+        </div>
+        <div class="check-item">
+          <div class="check-icon yes">✓</div>
+          <div>
+            <div class="check-title">Closed under countable unions</div>
+            <div class="check-desc">Sub-additivity handles the all-zero case; monotonicity handles the any-one case.</div>
+          </div>
+        </div>
+      </div>
+      <!-- Probability strip -->
+      <p class="proof-text" style="margin-top:18px;"><strong>Why only 0 and 1?</strong> Visualise the probability line:</p>
+      <div class="prob-strip-wrap">
+        <div class="prob-strip">
+          <span class="pin zero">0</span>
+          <span class="pin mid">0.5</span>
+          <span class="pin one">1</span>
+        </div>
+        <div class="prob-labels">
+          <span class="ok">∈ 𝒢</span>
+          <span class="bad">∉ 𝒢 (open interior)</span>
+          <span class="ok">∈ 𝒢</span>
+        </div>
+      </div>
+      <p class="proof-text" style="margin-top:14px;">
+        Only the two <strong style="color:var(--green);">extreme</strong> values survive the complement map <span class="math">p ↦ 1−p</span> as a fixed pair.
+        This is precisely what makes the complement axiom work — and it is the deepest reason 𝒢 closes.
+      </p>
+    </div>
+  </div>
+
+  <footer><p>Built for measure-theory intuition · all proofs are elementary and self-contained</p></footer>
+</div>
+
+<!-- ═══════════════ SCRIPTS ═══════════════ -->
+<script>
+// ─── accordion toggle ─────────────────────
+function toggle(header) {
+  const body = header.nextElementSibling;
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  header.classList.toggle('open', !isOpen);
+}
+
+// ─── Axiom 2: complement cases ────────────
+function setComp(c) {
+  document.querySelectorAll('#compButtons .btn').forEach(b => b.classList.remove('active'));
+  if (c === 'zero') {
+    document.querySelectorAll('#compButtons .btn')[0].classList.add('active');
+    document.getElementById('compA').setAttribute('fill','rgba(224,112,112,0.18)');
+    document.getElementById('compA').setAttribute('stroke','rgba(224,112,112,0.4)');
+    document.getElementById('compALabel').textContent = 'A';
+    document.getElementById('compAProb').textContent  = 'P(A)=0';
+    document.getElementById('compAProb').setAttribute('fill','#e07070');
+    document.getElementById('compAcLabel').textContent = 'Aᶜ';
+    document.getElementById('compAcProb').textContent  = 'P(Aᶜ)=1';
+    document.getElementById('compAcProb').setAttribute('fill','#6fcf82');
+    document.getElementById('compAnnotation').textContent = 'P(A)=0  →  P(Aᶜ) = 1−0 = 1  →  Aᶜ ∈ 𝒢  ✓';
+    document.getElementById('compState').innerHTML = 'Current case: <span class="hl">P(A) = 0</span> → P(Aᶜ) = <span class="hl">1</span>';
+  } else {
+    document.querySelectorAll('#compButtons .btn')[1].classList.add('active');
+    document.getElementById('compA').setAttribute('fill','rgba(111,207,130,0.18)');
+    document.getElementById('compA').setAttribute('stroke','rgba(111,207,130,0.4)');
+    document.getElementById('compALabel').textContent = 'A';
+    document.getElementById('compAProb').textContent  = 'P(A)=1';
+    document.getElementById('compAProb').setAttribute('fill','#6fcf82');
+    document.getElementById('compAcLabel').textContent = 'Aᶜ';
+    document.getElementById('compAcProb').textContent  = 'P(Aᶜ)=0';
+    document.getElementById('compAcProb').setAttribute('fill','#e07070');
+    document.getElementById('compAnnotation').textContent = 'P(A)=1  →  P(Aᶜ) = 1−1 = 0  →  Aᶜ ∈ 𝒢  ✓';
+    document.getElementById('compState').innerHTML = 'Current case: <span class="hl">P(A) = 1</span> → P(Aᶜ) = <span class="hl">0</span>';
+  }
+}
+
+// ─── Axiom 3: countable union interactive ─
+let unionCase = 'allzero';   // 'allzero' | 'someoneone'
+let chipState  = [true, true, true, false]; // which Aᵢ are toggled on
+
+const chipColors = ['#e07070','#7aabf0','#b088e8','#6fcf82'];
+const chipBg    = ['rgba(224,112,112,','rgba(122,171,240,','rgba(176,136,232,','rgba(111,207,130,'];
+
+function buildChips() {
+  const container = document.getElementById('unionSets');
+  container.innerHTML = '';
+  const labels = unionCase === 'allzero'
+    ? ['A₁ (P=0)','A₂ (P=0)','A₃ (P=0)','A₄ (P=0)']
+    : ['A₁ (P=0)','A₂ (P=1)','A₃ (P=0)','A₄ (P=0)'];
+  labels.forEach((lbl, i) => {
+    const ch = document.createElement('div');
+    ch.className = 'set-chip ' + (chipState[i] ? 'on' : 'off');
+    ch.textContent = lbl;
+    ch.style.color = chipState[i] ? chipColors[i] : 'var(--text-dim)';
+    ch.style.borderColor = chipState[i] ? chipColors[i] : 'rgba(255,255,255,.1)';
+    ch.style.background  = chipState[i] ? chipBg[i]+'0.12)' : 'rgba(255,255,255,.04)';
+    ch.onclick = () => { chipState[i] = !chipState[i]; buildChips(); updateUnionResult(); };
+    container.appendChild(ch);
+  });
+}
+
+function updateUnionResult() {
+  const on = chipState.map((v,i) => v ? i : -1).filter(x => x >= 0);
+  const labels = unionCase === 'allzero'
+    ? ['A₁','A₂','A₃','A₄']
+    : ['A₁','A₂','A₃','A₄'];
+  const probs  = unionCase === 'allzero'
+    ? [0,0,0,0]
+    : [0,1,0,0];
+
+  if (on.length === 0) {
+    document.getElementById('unionExpr').textContent = '∅ (empty)';
+    document.getElementById('unionProb').textContent = 'P(∅) = 0  ∈ {0,1} ✓';
+    document.getElementById('unionProb').style.color = 'var(--green)';
+  } else {
+    document.getElementById('unionExpr').textContent = on.map(i => labels[i]).join(' ∪ ');
+    const hasOne = on.some(i => probs[i] === 1);
+    if (hasOne) {
+      document.getElementById('unionProb').textContent = 'P(∪) = 1  ∈ {0,1} ✓  (monotonicity)';
+      document.getElementById('unionProb').style.color = 'var(--green)';
+    } else {
+      document.getElementById('unionProb').textContent = 'P(∪) = 0  ∈ {0,1} ✓  (sub-additivity)';
+      document.getElementById('unionProb').style.color = 'var(--green)';
+    }
+  }
+}
+
+function setUnionCase(c) {
+  document.querySelectorAll('#unionCaseButtons .btn').forEach(b => b.classList.remove('active'));
+  if (c === 'allzero') {
+    document.querySelectorAll('#unionCaseButtons .btn')[0].classList.add('active');
+    unionCase = 'allzero';
+    // update SVG labels
+    document.getElementById('uA1').setAttribute('fill','rgba(224,112,112,0.14)');
+    document.getElementById('uA1').setAttribute('stroke','rgba(224,112,112,0.3)');
+    document.getElementById('uA2').setAttribute('fill','rgba(224,112,112,0.14)');
+    document.getElementById('uA2').setAttribute('stroke','rgba(224,112,112,0.3)');
+    document.getElementById('uA3').setAttribute('fill','rgba(224,112,112,0.14)');
+    document.getElementById('uA3').setAttribute('stroke','rgba(224,112,112,0.3)');
+    document.getElementById('unionAnnot1').textContent = 'Case 1: All P(Aᵢ)=0  →  P(∪Aᵢ) ≤ ΣP(Aᵢ) = 0  →  P(∪Aᵢ) = 0  ∈ {0,1}  ✓';
+    // set A2 label back
+    document.querySelectorAll('#unionSVG text')[3].textContent = 'A₂ P=0';
+    document.querySelectorAll('#unionSVG text')[3].setAttribute('fill','#e07070');
+  } else {
+    document.querySelectorAll('#unionCaseButtons .btn')[1].classList.add('active');
+    unionCase = 'someone';
+    // highlight A2 as green (P=1)
+    document.getElementById('uA2').setAttribute('fill','rgba(111,207,130,0.18)');
+    document.getElementById('uA2').setAttribute('stroke','rgba(111,207,130,0.4)');
+    document.querySelectorAll('#unionSVG text')[3].textContent = 'A₂ P=1';
+    document.querySelectorAll('#unionSVG text')[3].setAttribute('fill','#6fcf82');
+    document.getElementById('unionAnnot1').textContent = 'Case 2: A₂ has P=1  →  P(∪Aᵢ) ≥ P(A₂)=1  →  P(∪Aᵢ) = 1  ∈ {0,1}  ✓';
+  }
+  chipState = [true,true,true,false];
+  buildChips();
+  updateUnionResult();
+}
+
+// ─── init ─────────────────────────────────
+buildChips();
+updateUnionResult();
+</script>
+</body>
+</html>
