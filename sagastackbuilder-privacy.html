@@ -232,10 +232,10 @@
     <p class="eyebrow">Saga StackBuilder</p>
     <h1>Privacy Policy</h1>
     <p class="meta">
-      <strong>Effective date:</strong> <span class="placeholder">August 18, 2026</span><br>
-      <strong>Last updated:</strong> <span class="placeholder">August 18, 2026</span><br>
-      <strong>Operated by:</strong> SK Labs, Cauvery Bhavana, 9/B Palace Road, Ambedkar Veedhi, Majestic,<br>
-      Bengaluru, Karnataka 560009, India
+      <strong>Effective date:</strong> <span class="placeholder">October 27, 2026</span><br>
+      <strong>Last updated:</strong> <span class="placeholder">October 27, 2026</span> (replaces the version dated <span class="placeholder">August 18, 2026</span>)<br>
+      <strong>Operated by:</strong> SK Labs, Manyata Tech Park, Block G3, Outer Ring Road, Nagawara,<br>
+      Bengaluru, Karnataka 560045, India
     </p>
   </header>
 
@@ -249,11 +249,11 @@
       <li><a href="#writes">What we write to your store</a></li>
       <li><a href="#ai">Artificial intelligence</a></li>
       <li><a href="#use">How we use information</a></li>
-      <li><a href="#legal-bases">Legal bases (GDPR)</a></li>
-      <li><a href="#tracking">Tracking identifier &amp; consent</a></li>
+      <li><a href="#legal-bases">Legal bases (GDPR / UK GDPR)</a></li>
+      <li><a href="#tracking">Storefront identifier &amp; consent</a></li>
       <li><a href="#pcd">Protected Customer Data</a></li>
       <li><a href="#sharing">How we share information</a></li>
-      <li><a href="#subprocessors">Service providers</a></li>
+      <li><a href="#subprocessors">Service providers (sub-processors)</a></li>
       <li><a href="#transfers">International transfers</a></li>
       <li><a href="#security">Data security</a></li>
       <li><a href="#retention">Data retention &amp; deletion</a></li>
@@ -268,17 +268,17 @@
     <h2><span class="num">1</span>About this policy</h2>
     <p class="lead">
       Saga StackBuilder (&ldquo;the App,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or
-      &ldquo;our&rdquo;) is a Shopify application that lets merchants group existing products into
-      goal-based bundles (&ldquo;stacks&rdquo;), offer those stacks to shoppers through a storefront
-      widget, and apply a bundle discount at checkout.
+      &ldquo;our&rdquo;) is a Shopify application for vitamin, supplement and wellness stores. It lets
+      merchants group existing products into goal-based bundles (&ldquo;stacks&rdquo;, for example a
+      sleep stack or an immunity stack), offer those stacks to shoppers through a storefront widget,
+      and apply a bundle discount at checkout, with the aim of increasing average order value.
     </p>
     <p>
-      This policy explains what personal and store data the App accesses, why we process it, what it
-      writes back to your store, how it uses artificial intelligence, how data is stored and
-      protected, how long we keep it, and the choices and rights available to you. It applies to the
-      App and its associated services only. It does not cover Shopify itself, the merchant store the
-      App is installed on, or any third-party website, which are governed by their own privacy
-      notices.
+      This policy explains what personal and store data the App accesses, why, what it writes back to
+      your store, how it uses artificial intelligence, how data is stored and protected, how long we
+      keep it, and the choices and rights available to you. It covers the App and its associated
+      services only. It does not cover Shopify itself, the merchant&rsquo;s store, or any third-party
+      website, each of which has its own privacy notice.
     </p>
   </section>
 
@@ -290,9 +290,8 @@
       <strong>Sagar S.</strong> and <strong>Sagarika S.K.</strong>
     </p>
     <p>
-      We are a small team and we handle privacy questions directly. There is no separate support
-      desk between you and the people who wrote the code — an email to the address in Section 19
-      reaches us.
+      We are a small team and we handle privacy questions ourselves. An email to the address in
+      Section 19 reaches the people who wrote the code.
     </p>
   </section>
 
@@ -301,21 +300,20 @@
     <p>This policy concerns three groups of people and data:</p>
     <ul>
       <li>
-        <strong>Merchants</strong> &mdash; the Shopify store owners and staff who install and use the
-        App&rsquo;s admin interface. With respect to merchant account information, we generally act as
-        a <strong>data controller</strong>.
+        <strong>Merchants.</strong> Shopify store owners and staff who install and use the App. For
+        merchant account information, we generally act as a <strong>data controller</strong>.
       </li>
       <li>
-        <strong>Store catalog &amp; order data</strong> &mdash; product, variant, and order
-        information belonging to the merchant&rsquo;s store, which the App caches and analyzes to
-        deliver its features. We process this on the merchant&rsquo;s behalf, generally acting as a
-        <strong>data processor</strong> for the merchant (the controller).
+        <strong>Store catalog and order data.</strong> Product, variant and order information
+        belonging to the merchant&rsquo;s store, which the App caches and analyzes to provide its
+        features. We process this on the merchant&rsquo;s behalf, generally as a
+        <strong>data processor</strong> (the merchant is the controller).
       </li>
       <li>
-        <strong>Storefront shoppers</strong> &mdash; visitors to a merchant&rsquo;s storefront who
-        see or interact with the stack widget. The App records anonymous, aggregate interaction
-        events for these visitors as described in Sections 4 and 9. We process this on the
-        merchant&rsquo;s behalf.
+        <strong>Storefront shoppers.</strong> Visitors to a merchant&rsquo;s storefront who see or
+        interact with the stack widget. The App records interaction events tied to an anonymous
+        identifier, as described in Sections 4.4 and 9. We process this on the merchant&rsquo;s
+        behalf.
       </li>
     </ul>
   </section>
@@ -323,11 +321,40 @@
   <section id="collect">
     <h2><span class="num">4</span>Information we collect</h2>
     <p>
-      We collect only the data needed to operate the App. The App requests the following Shopify
-      access scopes: <strong>read products</strong>, <strong>write products</strong>,
-      <strong>read orders</strong>, and <strong>write discounts</strong>. Sections 5 and 6 explain
-      exactly what the two write scopes are used for. We do not request theme scopes, and we do not
-      request customer scopes.
+      We collect only what is needed to operate the App. The App requests these Shopify access
+      scopes:
+    </p>
+    <table>
+      <caption>Shopify access scopes the App requests.</caption>
+      <thead>
+        <tr><th scope="col">Scope</th><th scope="col">Why</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="Scope"><code>read_products</code></td>
+          <td data-label="Why">Show your products in the App and in the storefront widget.</td>
+        </tr>
+        <tr>
+          <td data-label="Scope"><code>write_products</code></td>
+          <td data-label="Why">Write the App&rsquo;s own discount metafield on products in a discounted stack (Section 5).</td>
+        </tr>
+        <tr>
+          <td data-label="Scope"><code>read_orders</code></td>
+          <td data-label="Why">Attribute orders, refunds and cancellations to stacks for analytics and plan limits.</td>
+        </tr>
+        <tr>
+          <td data-label="Scope"><code>write_discounts</code></td>
+          <td data-label="Why">Create the automatic discount that connects our checkout discount function (Section 5).</td>
+        </tr>
+        <tr>
+          <td data-label="Scope"><code>read_themes</code></td>
+          <td data-label="Why">Check whether the App&rsquo;s widget block or app embed is enabled in your theme, and read your theme&rsquo;s button styling so the widget can match it. We never change theme files.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      We do not request customer scopes, and we do not request access to customer names, email
+      addresses, phone numbers or addresses.
     </p>
 
     <h3>4.1 Merchant &amp; store account information</h3>
@@ -339,60 +366,89 @@
       <tbody>
         <tr>
           <td data-label="Data">Store domain and Shopify store ID</td>
-          <td data-label="Purpose">Identify your store and scope all of your data to your account.</td>
+          <td data-label="Purpose">Identify your store and keep all of your data scoped to your account.</td>
         </tr>
         <tr>
-          <td data-label="Data">Store name, contact email, primary currency, time zone</td>
-          <td data-label="Purpose">Display the App correctly, format figures, and contact you about the service.</td>
+          <td data-label="Data">Store currency and time zone</td>
+          <td data-label="Purpose">Format money and dates correctly.</td>
         </tr>
         <tr>
           <td data-label="Data">Shopify access token and granted scopes</td>
-          <td data-label="Purpose">Authenticate API calls to Shopify on your behalf. Stored encrypted at rest (see Section 14).</td>
+          <td data-label="Purpose">Call Shopify&rsquo;s API on your behalf (see Section 14 for how tokens are protected).</td>
         </tr>
         <tr>
-          <td data-label="Data">Subscription &amp; billing status</td>
-          <td data-label="Purpose">Manage your plan, trial period, and access to features. Charges are processed by Shopify Billing, not by us.</td>
+          <td data-label="Data">Subscription and billing status (plan, status, trial and billing-period dates, Shopify charge ID)</td>
+          <td data-label="Purpose">Manage your plan and trial. Payments are processed by Shopify Billing, not by us. We never see card details.</td>
         </tr>
         <tr>
-          <td data-label="Data">App settings you configure</td>
-          <td data-label="Purpose">Store your stack definitions, discount settings, widget appearance, and placement preferences.</td>
+          <td data-label="Data">App settings and content you create</td>
+          <td data-label="Purpose">Your stacks, store goals, discount settings, widget appearance and placement preferences.</td>
+        </tr>
+        <tr>
+          <td data-label="Data">Communications</td>
+          <td data-label="Purpose">If you email us for support, we keep that correspondence to help you.</td>
         </tr>
       </tbody>
     </table>
+    <p>
+      The App uses Shopify&rsquo;s offline (store-level) authentication, so it does not store personal
+      profiles of individual staff members.
+    </p>
 
     <h3>4.2 Cached store catalog data</h3>
     <p>
-      To render product pickers and the storefront widget quickly, the App keeps a mirror cache of
-      your catalog: product titles, handles, images, prices, inventory availability, variants
-      (including selling-plan and subscription indicators), and tags. Shopify remains the source of
-      truth; the cache is kept current through product webhooks and can be rebuilt at any time.
+      To keep product pickers and the storefront widget fast, the App keeps a cache of your catalog:
+      product titles, descriptions, handles, images, prices, availability, variants (including
+      selling-plan and subscription indicators), product types and tags. Shopify remains the source of
+      truth. The cache is kept current through product webhooks, and products you delete from Shopify
+      are removed from it.
     </p>
 
-    <h3>4.3 Order data (for attribution)</h3>
+    <h3>4.3 Order data (for attribution and plan limits)</h3>
     <p>
-      The App receives order webhooks from Shopify and reads the fields needed to attribute revenue
-      to stacks: the order identifier, order totals and currency, line-item prices and quantities,
-      line-item discount allocations, and the stack identifier the widget attaches to items it adds.
-      We <strong>do not build a full mirror of your orders</strong> and we do not store customer
-      names, email addresses, shipping addresses, or payment details. We store order identifiers,
-      monetary amounts, currency, and internal product references only.
+      The App receives order webhooks from Shopify (orders paid, orders cancelled, refunds created) and
+      stores only the fields needed to attribute revenue to stacks and measure plan usage:
+    </p>
+    <ul>
+      <li>order ID and order number (for example #1001) and processing date;</li>
+      <li>line-item IDs, product references, quantities and amounts after discounts, and currency;</li>
+      <li>the stack markers the widget attaches to cart lines (Section 5);</li>
+      <li>the order&rsquo;s sales channel (for example &ldquo;online store&rdquo;);</li>
+      <li>refund IDs and refunded or cancelled amounts;</li>
+      <li>whether the order is a test order.</li>
+    </ul>
+    <p>
+      We <strong>do not</strong> store customer names, email addresses, phone numbers, shipping or
+      billing addresses, or payment details.
     </p>
 
     <h3>4.4 Storefront interaction events</h3>
     <p>
-      On a merchant&rsquo;s storefront, the widget records aggregate interaction events &mdash;
-      impressions, clicks, and add-to-cart actions &mdash; each tied to a first-party, anonymous
-      session identifier. This identifier is a random value used solely to connect a single
-      visitor&rsquo;s actions for attribution. It contains <strong>no name, email, address, or other
-      directly identifying information</strong>. Its use is described further in Section 9.
+      On a merchant&rsquo;s storefront, the widget records interaction events: when a stack is shown
+      (impression), clicked, added to cart, or left after selection, plus the stack and products
+      involved and where on the page it appeared. Each event is linked to an anonymous identifier: a
+      random value (UUID) stored in the shopper&rsquo;s browser localStorage under the key
+      <code>saga_sid</code>. It persists across visits to the same store until the shopper clears their
+      browser storage. It contains <strong>no name, email, address or other directly identifying
+      information</strong>, and we do not store shoppers&rsquo; IP addresses or browser user-agent
+      strings with these events. Section 9 explains when the identifier is and isn&rsquo;t created.
+    </p>
+    <p>
+      The widget also stores two non-identifying layout values in localStorage (a cached card height
+      and product handles) so it can render without visible jumps. <strong>The App sets no
+      cookies.</strong>
+    </p>
+    <p>
+      The App also keeps aggregate, per-page counts of how often the widget was shown. These are not
+      linked to any individual.
     </p>
   </section>
 
   <section id="writes">
     <h2><span class="num">5</span>What we write to your store</h2>
     <p>
-      The App does not only read from your store. So that a bundle discount can actually be applied
-      at checkout, it writes in three specific places, and nowhere else:
+      So that a bundle discount can be applied at checkout, the App writes to your store in these
+      places, and nowhere else:
     </p>
     <table>
       <caption>Everything the App creates or modifies in your Shopify store.</caption>
@@ -401,79 +457,73 @@
       </thead>
       <tbody>
         <tr>
-          <td data-label="What">A product metafield in the <code>saga_stackbuilder</code> namespace, on each product that belongs to a discounted stack</td>
-          <td data-label="Why">Records that stack&rsquo;s discount rate so the checkout discount function can read it. It contains the stack identifier and a percentage &mdash; no personal data. It is removed when the stack is deactivated or deleted.</td>
+          <td data-label="What">A product metafield in the <code>saga_stackbuilder</code> namespace on each product in a discounted stack</td>
+          <td data-label="Why">Holds that stack&rsquo;s discount configuration so our checkout discount function can read it. No personal data. Removed when the stack is deactivated or deleted.</td>
         </tr>
         <tr>
-          <td data-label="What">One automatic discount in your Discounts admin, titled after your store</td>
-          <td data-label="Why">Connects our discount function to your checkout. Without it, no bundle discount can be applied. It is created once, at install.</td>
+          <td data-label="What">One automatic discount in your Discounts admin</td>
+          <td data-label="Why">Connects our discount function to your checkout. Without it, no bundle discount can be applied.</td>
         </tr>
         <tr>
-          <td data-label="What">A line-item property named <code>_stack_id</code> on cart lines the widget adds</td>
-          <td data-label="Why">Marks which stack a shopper was completing, so the correct discount is applied and the resulting order can be attributed to that stack. It holds an internal stack identifier only.</td>
+          <td data-label="What">Cart line-item properties on items the widget adds: <code>_stack_id</code>, <code>_saga_stack_instance</code>, <code>_saga_added_qty</code>, <code>_saga_page_product</code></td>
+          <td data-label="Why">Mark which stack a shopper was completing, so the right discount applies and the resulting order can be attributed. They hold internal IDs and quantities only, never the shopper&rsquo;s identifier or any personal data.</td>
         </tr>
       </tbody>
     </table>
     <p>
-      We do not modify your product titles, descriptions, prices, images, inventory, or any other
-      catalog content. We do not create, modify, or cancel orders. The write scopes exist for the
-      three purposes above.
+      We do not change your product titles, descriptions, prices, images, inventory, theme files or
+      other catalog content, and we do not create, modify or cancel orders.
     </p>
   </section>
 
   <section id="ai">
     <h2><span class="num">6</span>Artificial intelligence</h2>
-    <p>
-      The App uses a third-party large language model to help merchants draft stacks. This is the
-      most significant change since the previous version of this policy, and we describe it in
-      detail.
-    </p>
+    <p>The App uses third-party large language models (LLMs) to help merchants build stacks.</p>
 
     <h3>6.1 What the AI does</h3>
     <p>
-      When you ask the App to suggest a stack, or when it prepares protocol templates for your
-      catalog, it sends a description of your products to a language model and receives back a
-      suggested grouping: which products belong together, a short benefit line for each, and a
-      rationale for the grouping. <strong>These are drafts.</strong> Nothing the model produces is
-      published to your storefront until you review it and choose to activate it.
+      When you set store goals, ask for stack suggestions, or when the App prepares stack templates for
+      your catalog, it sends product information to a language model and receives back a suggested
+      grouping, short benefit copy, and a rationale. The App also uses the model to review that copy
+      and to suggest fixes to widget placement. <strong>These are drafts:</strong> nothing a model
+      produces reaches your storefront until you review it and choose to activate it.
     </p>
 
     <h3>6.2 What is sent to the model</h3>
     <p>
-      We send <strong>product information from your catalog only</strong> &mdash; product titles,
-      descriptions, tags, product types, and prices. We do <strong>not</strong> send:
+      We send <strong>catalog and merchant-authored content only</strong>: product titles,
+      descriptions, tags, product types and prices, plus the store goals and stack copy you write in
+      the App. We do <strong>not</strong> send:
     </p>
     <ul>
-      <li>customer names, email addresses, or any customer personal data;</li>
-      <li>order data, order totals, or purchase histories;</li>
-      <li>storefront shopper interaction data or session identifiers;</li>
-      <li>your Shopify access token or any credential;</li>
-      <li>your store&rsquo;s contact details or account information.</li>
+      <li>any customer or shopper personal data;</li>
+      <li>order data, order totals or purchase histories;</li>
+      <li>storefront interaction data or shopper identifiers;</li>
+      <li>your Shopify access token or any other credential;</li>
+      <li>your store&rsquo;s account or contact details.</li>
     </ul>
 
     <h3>6.3 Training</h3>
     <div class="callout">
       <p>
-        <strong>Your data is not used to train the model.</strong> We use the model provider&rsquo;s
-        API under commercial terms that exclude API inputs and outputs from model training. We do
-        not train any model of our own on merchant data.
+        We access models through providers&rsquo; paid APIs under terms that do not permit them to use
+        API inputs or outputs to train their models. We do not train any model of our own on merchant
+        data.
       </p>
     </div>
 
     <h3>6.4 Caching</h3>
     <p>
-      To avoid re-asking the same question and to keep the App responsive, we cache the model&rsquo;s
-      suggestions against a fingerprint of the catalog they were generated from. When your catalog
-      changes materially, the cache is invalidated and suggestions are regenerated. Cached
-      suggestions are stored with your store&rsquo;s data and deleted with it (Section 15).
+      To keep the App responsive, we cache model output against a fingerprint of the catalog it was
+      generated from. When your catalog changes materially, the cache is invalidated and suggestions
+      are regenerated. Cached output is stored with your store&rsquo;s data and deleted with it
+      (Section 15).
     </p>
 
     <h3>6.5 Your control</h3>
     <p>
-      AI-generated content is a starting point, not a decision. You review every suggestion before it
-      goes live, you can edit any part of it, and you can build stacks entirely by hand without using
-      the AI features at all. No AI-generated text reaches a shopper unless you activate the stack
-      containing it.
+      AI output is a starting point, not a decision. You review and can edit every suggestion before
+      it goes live, and you can build stacks entirely by hand without using the AI features.
     </p>
   </section>
 
@@ -481,53 +531,59 @@
     <h2><span class="num">7</span>How we use information</h2>
     <p>We use the information above to:</p>
     <ul>
-      <li>Provide, operate, and maintain the App&rsquo;s features for the merchant;</li>
-      <li>Render the storefront widget and add selected products to a shopper&rsquo;s cart;</li>
-      <li>Apply the merchant&rsquo;s configured bundle discount at checkout;</li>
-      <li>Draft stack suggestions using a language model, as described in Section 6;</li>
-      <li>Measure how stacks perform (impressions, clicks, add-to-carts, influenced orders, influenced revenue, attachment rate, and average-order-value lift), and present those metrics to the merchant;</li>
-      <li>Authenticate and synchronize data with Shopify;</li>
-      <li>Manage subscriptions, trials, and plan limits;</li>
-      <li>Provide support, diagnose problems, and protect the App against abuse and fraud (for example, rate-limiting the public tracking endpoint);</li>
-      <li>Comply with legal obligations and Shopify&rsquo;s program requirements.</li>
+      <li>provide, operate and maintain the App;</li>
+      <li>render the storefront widget and add selected products to a shopper&rsquo;s cart;</li>
+      <li>apply the merchant&rsquo;s bundle discount at checkout;</li>
+      <li>draft stack suggestions with a language model (Section 6);</li>
+      <li>measure stack performance (impressions, clicks, add-to-carts, influenced orders, influenced revenue, attachment rate and average-order-value lift) and show those metrics to the merchant;</li>
+      <li>measure attributed revenue over a rolling 30-day window to apply plan limits;</li>
+      <li>authenticate with and stay in sync with Shopify;</li>
+      <li>manage subscriptions and trials;</li>
+      <li>provide support, diagnose problems, and protect the App against abuse (for example, rate-limiting the public tracking endpoint);</li>
+      <li>comply with legal obligations and Shopify&rsquo;s program requirements.</li>
     </ul>
     <p>We do not sell personal information, and we do not use it for advertising or cross-context behavioral advertising.</p>
   </section>
 
   <section id="legal-bases">
-    <h2><span class="num">8</span>Legal bases for processing (GDPR / UK GDPR)</h2>
-    <p>Where the GDPR or UK GDPR applies, we rely on the following legal bases:</p>
+    <h2><span class="num">8</span>Legal bases (GDPR / UK GDPR)</h2>
+    <p>Where the GDPR or UK GDPR applies, we rely on:</p>
     <ul>
-      <li><strong>Performance of a contract</strong> &mdash; to provide the App to merchants who install it;</li>
-      <li><strong>Legitimate interests</strong> &mdash; to secure, maintain, and improve the App, and to produce aggregate analytics for merchants, balanced against individuals&rsquo; rights;</li>
-      <li><strong>Consent</strong> &mdash; for storefront tracking where consent is required, as described in Section 9;</li>
-      <li><strong>Legal obligation</strong> &mdash; to meet our legal and regulatory duties.</li>
+      <li><strong>Performance of a contract:</strong> to provide the App to merchants who install it;</li>
+      <li><strong>Legitimate interests:</strong> to secure, maintain and improve the App and to produce analytics for merchants, balanced against individuals&rsquo; rights;</li>
+      <li><strong>Consent:</strong> for storefront analytics where consent is required (Section 9);</li>
+      <li><strong>Legal obligation:</strong> to meet our legal and regulatory duties.</li>
     </ul>
-    <p>For storefront shopper data, the merchant is the controller and determines the applicable legal basis; we process this data on the merchant&rsquo;s documented instructions.</p>
+    <p>For storefront shopper data, the merchant is the controller and determines the legal basis; we process that data on the merchant&rsquo;s instructions.</p>
   </section>
 
   <section id="tracking">
-    <h2><span class="num">9</span>Tracking identifier &amp; consent</h2>
+    <h2><span class="num">9</span>Storefront identifier &amp; consent</h2>
     <p>
-      The anonymous session identifier described in Section 4.4 is a behavioral attribution
-      identifier. Although it stores no directly identifying details, we treat it as subject to
-      privacy and consent rules rather than claiming it is exempt.
+      The anonymous identifier in Section 4.4 is used for attribution. It stores no directly
+      identifying details, but we treat it as subject to privacy and consent rules rather than
+      claiming it is exempt.
     </p>
+    <p>
+      The widget follows Shopify&rsquo;s Customer Privacy API, which is how Shopify&rsquo;s own cookie
+      banner and most consent apps share a shopper&rsquo;s choice:
+    </p>
+    <ul>
+      <li><strong>Consent API present, analytics not allowed</strong> (declined or not yet answered): no events are sent and no identifier is written to the shopper&rsquo;s browser.</li>
+      <li><strong>Consent API present, analytics allowed:</strong> events are sent and the identifier is used.</li>
+      <li><strong>No consent API on the store</strong> (no consent banner configured): events are sent and the identifier is used.</li>
+      <li><strong>Any error while checking consent:</strong> no events are sent.</li>
+    </ul>
     <div class="callout">
       <p>
-        The widget <strong>respects the merchant&rsquo;s existing consent signal</strong> where one is
-        exposed (for example, through Shopify&rsquo;s Customer Privacy API or a consent banner). If
-        analytics consent has not been given, the widget still renders and can still add items to the
-        cart, but it <strong>suppresses the tracking beacon</strong> rather than firing it. In that
-        case, attribution simply undercounts &mdash; metrics are treated as a meaningful lower bound.
+        In every case the widget still works and can still add items to the cart; attribution simply
+        undercounts when tracking is off.
       </p>
     </div>
     <p>
-      We do not claim to store no personal data of any kind. We claim that we store
-      <strong>no customer personal information</strong> and use only an anonymous,
-      consent-respecting attribution identifier. Merchants are responsible for displaying any consent
-      mechanism their jurisdiction requires and for disclosing the App&rsquo;s analytics in their own
-      storefront privacy notice.
+      Merchants are responsible for configuring a consent banner where their jurisdiction requires one
+      (for example for shoppers in the EEA or UK) and for disclosing the App&rsquo;s analytics in their
+      own storefront privacy notice.
     </p>
   </section>
 
@@ -535,11 +591,11 @@
     <h2><span class="num">10</span>Protected Customer Data</h2>
     <p>
       Order data accessed through Shopify falls under Shopify&rsquo;s Protected Customer Data
-      requirements. We access order data only with the required Shopify approval in place, limit our
-      use of it to the attribution features described in this policy, retain only the minimal fields
-      listed in Section 4.3, and apply the security and retention controls in Sections 14 and 15. We
-      do not use order data to identify individual shoppers, we do not send it to any language model,
-      and we do not use it for any purpose unrelated to the merchant&rsquo;s analytics.
+      requirements. We access order data with Shopify&rsquo;s required approval, for analytics
+      purposes only, and we have not requested access to any protected customer fields (name, email,
+      phone or address). We keep only the fields listed in Section 4.3, apply the security and
+      retention controls in Sections 14 and 15, do not use order data to identify individual
+      shoppers, and never send order data to a language model.
     </p>
   </section>
 
@@ -547,12 +603,12 @@
     <h2><span class="num">11</span>How we share information</h2>
     <p>We share information only as needed to run the App:</p>
     <ul>
-      <li><strong>With Shopify</strong> &mdash; to authenticate, sync catalog and order data, render the widget through Shopify&rsquo;s App Proxy, apply discounts at checkout, and process billing;</li>
-      <li><strong>With service providers (sub-processors)</strong> &mdash; listed in Section 12, who process data on our behalf under contract;</li>
-      <li><strong>For legal reasons</strong> &mdash; where required by law, legal process, or to protect the rights, safety, and security of users, the public, or the App;</li>
-      <li><strong>In a business transfer</strong> &mdash; if the App or its assets are acquired or merged, in which case this policy will continue to govern the transferred data, or you will be notified of any new policy.</li>
+      <li><strong>With Shopify:</strong> to authenticate, sync catalog and order data, serve the widget through Shopify&rsquo;s App Proxy, apply discounts at checkout, and process billing;</li>
+      <li><strong>With service providers (sub-processors)</strong> listed in Section 12, who process data on our behalf;</li>
+      <li><strong>For legal reasons:</strong> where required by law or legal process, or to protect the rights, safety and security of users, the public or the App;</li>
+      <li><strong>In a business transfer:</strong> if the App or its assets are acquired or merged, this policy will continue to govern the transferred data, or you will be notified of any new policy.</li>
     </ul>
-    <p>We do not sell or rent personal information to third parties.</p>
+    <p>We do not sell or rent personal information.</p>
   </section>
 
   <section id="subprocessors">
@@ -566,31 +622,41 @@
         <tr>
           <td data-label="Provider">Shopify Inc.</td>
           <td data-label="Function">Platform, authentication, webhooks, App Proxy, checkout discount function, billing</td>
-          <td data-label="Data involved">Store, catalog, order, and subscription data</td>
+          <td data-label="Data involved">Store, catalog, order and subscription data</td>
         </tr>
         <tr>
-          <td data-label="Provider">Railway Corp. (application hosting &amp; PostgreSQL database)</td>
-          <td data-label="Function">Runs the App and stores its database</td>
-          <td data-label="Data involved">All App data described in Section 4</td>
+          <td data-label="Provider">Railway Corp.</td>
+          <td data-label="Function">Application hosting, PostgreSQL database, and server logs</td>
+          <td data-label="Data involved">All App data described in Section 4. Server logs can contain store domains and order IDs.</td>
         </tr>
         <tr>
-          <td data-label="Provider"><span class="placeholder">Groq</span></td>
-          <td data-label="Function">Language model that drafts stack suggestions (Section 6)</td>
-          <td data-label="Data involved">Product titles, descriptions, tags, types, and prices only. No customer, order, or account data.</td>
+          <td data-label="Provider">OpenRouter, Inc.</td>
+          <td data-label="Function">Language-model API gateway (our current AI provider), which routes requests to the underlying model provider</td>
+          <td data-label="Data involved">Catalog and merchant-authored content only (Section 6.2)</td>
+        </tr>
+        <tr>
+          <td data-label="Provider">Groq, Inc. or Google (Gemini API)</td>
+          <td data-label="Function">Alternative language-model providers we may use instead of OpenRouter</td>
+          <td data-label="Data involved">Catalog and merchant-authored content only (Section 6.2)</td>
         </tr>
       </tbody>
     </table>
-    <p>We require each provider to safeguard data consistent with this policy and applicable law.</p>
+    <p>
+      The App&rsquo;s admin Home page shows video thumbnails loaded from YouTube (Google). Loading them
+      lets YouTube see the viewer&rsquo;s IP address and browser details. YouTube&rsquo;s own privacy
+      policy applies to that.
+    </p>
+    <p>We will update this list before adding a new provider that processes App data.</p>
   </section>
 
   <section id="transfers">
-    <h2><span class="num">13</span>International data transfers</h2>
+    <h2><span class="num">13</span>International transfers</h2>
     <p>
-      We are based in India. Our service providers may process data in countries where they operate,
-      including the United States and other countries. Where personal data is transferred outside
-      jurisdictions with applicable data transfer restrictions (such as the EEA or the UK), we rely
-      on appropriate safeguards, including the European Commission&rsquo;s Standard Contractual
-      Clauses or equivalent legal mechanisms provided by our service providers.
+      We are based in India. Our service providers may process data in the United States and other
+      countries where they operate. Where personal data is transferred out of a jurisdiction with
+      transfer restrictions (such as the EEA or UK), we rely on appropriate safeguards, such as the
+      European Commission&rsquo;s Standard Contractual Clauses or equivalent mechanisms offered by our
+      providers.
     </p>
   </section>
 
@@ -598,91 +664,108 @@
     <h2><span class="num">14</span>Data security</h2>
     <p>We apply technical and organizational measures appropriate to the data we hold, including:</p>
     <ul>
-      <li><strong>Encryption of Shopify access tokens at rest</strong> using AES-256-GCM, with the initialization vector and authentication tag stored alongside the ciphertext;</li>
-      <li>Encryption in transit (HTTPS/TLS) for all API and storefront communication;</li>
-      <li>Per-merchant data scoping, so each merchant&rsquo;s queries are restricted to their own account;</li>
-      <li>Validation, ownership checks, and rate-limiting on the public tracking endpoint to prevent abuse;</li>
+      <li><strong>Access tokens:</strong> the copy of your Shopify access token held in our merchant records is encrypted at rest with AES-256-GCM. Shopify&rsquo;s standard session storage, used to authenticate requests, also holds the token in our database, which is protected by restricted access controls.</li>
+      <li><strong>Encryption in transit:</strong> HTTPS/TLS for all admin, API and storefront communication.</li>
+      <li><strong>Verified requests:</strong> storefront requests are accepted only through Shopify&rsquo;s signed App Proxy, and webhooks are verified with Shopify&rsquo;s signature.</li>
+      <li><strong>Per-merchant scoping:</strong> each merchant&rsquo;s data is restricted to their own account.</li>
+      <li><strong>Abuse protection:</strong> validation, ownership checks and rate-limiting on the public tracking endpoint.</li>
       <li>Restricted administrative access to the production environment.</li>
     </ul>
-    <p>No method of transmission or storage is completely secure. While we work to protect your data, we cannot guarantee absolute security.</p>
+    <p>No method of transmission or storage is completely secure, so we cannot guarantee absolute security.</p>
   </section>
 
   <section id="retention">
     <h2><span class="num">15</span>Data retention &amp; deletion</h2>
-    <p>We keep data only as long as needed for the purposes in this policy:</p>
+    <p>We keep data only as long as needed for the purposes in this policy.</p>
     <ul>
       <li>
-        <strong>While the App is installed</strong> &mdash; we retain your account, settings, cached
-        catalog, cached AI suggestions, and analytics data so the App functions.
+        <strong>While the App is installed:</strong> we keep your account, settings, cached catalog,
+        cached AI output and analytics data so the App works.
       </li>
       <li>
-        <strong>On uninstall</strong> &mdash; when you uninstall the App, Shopify notifies us and we
-        mark your account inactive and stop billing. We retain your data for a limited grace window of
-        approximately <strong>30 days</strong> so that a reinstall can restore your configuration,
-        after which inactive data is purged.
+        <strong>Deleted stacks:</strong> deleted stacks go to a Bin and can be restored for 30 days,
+        after which they are permanently removed. Stacks that earned revenue are kept as a minimal
+        record so your historical revenue figures stay accurate. &ldquo;Delete forever&rdquo; and
+        &ldquo;Empty bin&rdquo; remove a stack&rsquo;s analytics events immediately.
       </li>
       <li>
-        <strong>On a data-deletion request from Shopify</strong> &mdash; we honor Shopify&rsquo;s
-        mandatory privacy webhooks. A shop-redaction request (sent roughly 48 hours after uninstall)
-        triggers deletion of that store&rsquo;s data regardless of the grace window.
+        <strong>On uninstall:</strong> Shopify notifies us. We mark your store inactive, stop billing,
+        delete your subscription record and session tokens, and remove the App&rsquo;s discount setup.
+        Your other data is kept until Shopify sends a shop-deletion request.
       </li>
       <li>
-        <strong>Customer data requests and redactions</strong> &mdash; because we store no customer
-        names, email addresses, or contact details, there is no customer personal data for us to
-        return or erase. Analytics records associated with an order identifier are handled in
-        accordance with the request.
+        <strong>Shop deletion (<code>shop/redact</code>):</strong> Shopify sends this about 48 hours
+        after uninstall. On receipt, we permanently delete all of that store&rsquo;s data, including its
+        account, stacks, settings, catalog cache, AI output, analytics, order attribution records,
+        billing-usage records and sessions.
+      </li>
+      <li>
+        <strong>Customer redaction (<code>customers/redact</code>):</strong> for each order Shopify
+        lists, we delete the order-linked analytics events and order attribution records.
+        Billing-usage entries for those orders are kept with the order ID and order number replaced by
+        anonymous placeholders, so plan-limit totals remain correct. Daily aggregate totals, which
+        contain no order or customer identifiers, are kept.
+      </li>
+      <li>
+        <strong>Customer data requests (<code>customers/data_request</code>):</strong> we store no
+        customer names, email addresses or contact details, so there is no customer personal data for
+        us to provide.
+      </li>
+      <li>
+        <strong>Server logs</strong> are kept by our hosting provider for its standard log-retention
+        period.
       </li>
     </ul>
-    <p>We may retain limited records longer where required for legal, accounting, or security purposes, kept to the minimum necessary.</p>
+    <p>We may keep limited records longer where required for legal, accounting or security purposes, kept to the minimum necessary.</p>
   </section>
 
   <section id="rights">
     <h2><span class="num">16</span>Your rights</h2>
     <p>
-      Depending on where you live, you may have rights over your personal information, including to
-      access, correct, delete, port, or restrict its processing, to object to processing, and to
-      withdraw consent. Where the CCPA/CPRA applies, you have rights to know, delete, and correct, and
-      a right not to be discriminated against for exercising them; note that we do not sell or share
-      personal information for cross-context behavioral advertising.
+      Depending on where you live, you may have rights to access, correct, delete, port or restrict
+      processing of your personal information, to object to processing, and to withdraw consent.
+      Where the CCPA/CPRA applies, you have the rights to know, delete and correct, and not to be
+      discriminated against for exercising them. We do not sell or share personal information for
+      cross-context behavioral advertising.
     </p>
     <p>
-      Merchants can exercise many of these rights directly by managing their data in the App or by
-      uninstalling it. For storefront shoppers, the merchant is the controller and is the primary
-      point of contact; we will assist merchants in responding to such requests. To make a request to
-      us directly, contact us using Section 19. We may need to verify your identity, and we will
-      respond within the timeframe required by applicable law.
+      Merchants can exercise many of these rights directly in the App or by uninstalling it, which
+      leads to full deletion as described in Section 15. Storefront shoppers can clear the identifier
+      at any time by clearing their browser storage, or decline analytics through the store&rsquo;s
+      consent banner. For shopper data the merchant is the controller and the first point of contact;
+      we will help merchants respond to such requests. To contact us directly, use Section 19. We may
+      need to verify your identity, and we will respond within the time required by applicable law.
     </p>
   </section>
 
   <section id="children">
     <h2><span class="num">17</span>Children&rsquo;s privacy</h2>
     <p>
-      The App is a business tool intended for merchants and is not directed to children. We do not
-      knowingly collect personal information from children. If you believe a child has provided
-      personal information to us, please contact us so we can delete it.
+      The App is a business tool for merchants and is not directed to children. We do not knowingly
+      collect personal information from children. If you believe a child has given us personal
+      information, contact us and we will delete it.
     </p>
   </section>
 
   <section id="changes">
     <h2><span class="num">18</span>Changes to this policy</h2>
     <p>
-      We may update this policy from time to time. When we make material changes, we will update the
-      &ldquo;Last updated&rdquo; date above and, where appropriate, notify merchants through the App or
-      by email. Your continued use of the App after an update takes effect constitutes acceptance of
-      the revised policy.
+      We may update this policy from time to time. For material changes, we will update the
+      &ldquo;Last updated&rdquo; date and, where appropriate, notify merchants in the App or by email.
+      Continued use of the App after an update takes effect means you accept the revised policy.
     </p>
   </section>
 
   <section id="contact">
     <h2><span class="num">19</span>Contact us</h2>
-    <p>For privacy questions or to exercise your rights, contact:</p>
+    <p>For privacy questions or to exercise your rights:</p>
     <p>
       <strong>SK Labs</strong><br>
-      Cauvery Bhavana, 9/B Palace Road<br>
-      Ambedkar Veedhi, Majestic<br>
-      Bengaluru, Karnataka 560009<br>
+      Manyata Tech Park, Block G3<br>
+      Outer Ring Road, Nagawara<br>
+      Bengaluru, Karnataka 560045<br>
       India<br>
-      Email: <a href="mailto:sa39in12th@gmail.com">sa39in12th@gmail.com</a>
+      Email: <a href="mailto:sagastack.dev@gmail.com">sagastack.dev@gmail.com</a>
     </p>
     <p>
       If you are in the EEA or UK and believe we have not addressed your concern, you may lodge a
@@ -692,7 +775,7 @@
 
   <footer class="colophon">
     Saga StackBuilder Privacy Policy &middot; SK Labs, Bengaluru &middot;
-    Effective <span class="placeholder">August 18, 2026</span>
+    Effective <span class="placeholder">October 27, 2026</span>
   </footer>
 
 </div>
